@@ -10,7 +10,35 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-console.log ("This is my app");
+function promptUser() {
+    return inquirer.prompt([
+        {
+        type: "list",
+        name: "roll",
+        message: "What is the employee's job title",
+        choices: ["Manager", "Engineer", "Intern"]
+      },
+      {
+        type: "input",
+        name: "name",
+        message: "What is the employee's name?"
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the employee's id?"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the employee's email?"
+      },
+
+    ]);
+  }
+
+  promptUser ();
+
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -23,8 +51,6 @@ console.log ("This is my app");
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
