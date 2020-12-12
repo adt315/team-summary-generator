@@ -10,34 +10,122 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const team = [];
+
 function promptUser() {
     return inquirer.prompt([
         {
-        type: "list",
-        name: "roll",
-        message: "What is the employee's job title",
-        choices: ["Manager", "Engineer", "Intern"]
-      },
-      {
-        type: "input",
-        name: "name",
-        message: "What is the employee's name?"
-      },
-      {
-        type: "input",
-        name: "id",
-        message: "What is the employee's id?"
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "What is the employee's email?"
-      },
-
+            type: "list",
+            name: "role",
+            message: "What is the employee's job title",
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+        {
+            type: "input",
+            name: "name",
+            message: "What is the employee's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the employee's id?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the employee's email?"
+        },
+        {
+            type: "list",
+            name: "add",
+            message: "Would you like to add another employee to your team?",
+            choices: ["Yes", "No"]
+        },
     ]);
-  }
+}
 
-  promptUser ();
+// promptUser();
+
+// async function createTemplate(){
+//     fs.writeFile(outputPath, render(team), function(error){
+//         if (error) {
+//             return console.log(error);
+//           }
+//             console.log("Your team roster has been created.");
+//           })
+//         };
+
+// createTemplate();
+
+promptUser()
+  .then(function createTemplate() {
+      fs.writeFile(outputPath, render(team), function(error){
+        if (error) {
+             return console.log(error);
+           }
+              console.log("Your team roster has been created.");
+           })
+         });
+
+// createTemplate();
+    //Create license badge based on input
+//     let badge = "https://img.shields.io/badge/license-MIT-green";
+//     if (data.license == "Apache") {
+//       badge = "https://img.shields.io/badge/license-Apache-blue";
+//     } else if (data.license == "GNU") {
+//       badge = "https://img.shields.io/badge/license-GNU-HSL(20%C2%B0%2C%20100%25%2C%2050%25)";
+//     } else {
+//       badge = "https://img.shields.io/badge/license-MIT-green"
+//     };
+
+//     const filename = "generatedREADME.md"
+
+//     var markdown = 
+    
+// `# ${data.title}
+
+// ${data.url}
+
+// ## License
+// ![badge](${badge}) 
+  
+// ## Description
+// ${data.description}
+
+// ${data.shots}
+  
+// ## Table of Contents
+// * [Installation](#installation)
+// * [Usage](#usage) 
+// * [Contribution](#contribution) 
+// * [Test](#test) 
+// * [Questions](#questions) 
+  
+// ## Installation
+// ${data.installation}
+  
+// ## Usage
+// ${data.usage}
+  
+// ## Contribution
+// ${data.contribution}
+  
+// ## Test
+// ${data.test}
+  
+// ## Questions
+// For questions please contact the project creator:
+// * ${data.github}
+// * ${data.email}
+// `;
+  
+// fs.writeFile(filename, markdown, function(err){
+//   if (err) {
+//     return console.log(err);
+//   }
+//     console.log("README is created");
+//   })
+// });
 
 
 
@@ -50,14 +138,8 @@ function promptUser() {
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
+// `output` folder. You can use the variable `outputPath` above to target this location.
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```

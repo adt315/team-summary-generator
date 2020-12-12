@@ -1,71 +1,32 @@
-<!-- The project must generate a `team.html` page in the `output` directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
-
-  * Name
-  * Role
-  * ID
-
-  * Role-specific property (School, link to GitHub profile, or office number) -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My Team</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c502137733.js"></script>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1>My Team</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 jumbotron mb-3 team-heading">
+                <h1 class="text-center">My Team</h1>
+            </div>
+        </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                <h4>Name</h4>
-                <h4>Role</h4>  
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: </li>
-                    <li class="list-group-item">Email: </li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
+    <div class="container">
+        <div class="row">
+            <div class="team-area col-12 d-flex justify-content-center">
+                
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Name</h4>
-                    <h4>Role</h4>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: </li>
-                    <li class="list-group-item">Email: </li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Name</h4>
-                    <h4>Role</h4>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: </li>
-                    <li class="list-group-item">Email: </li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-        </div>
-        
-
+    </div>
 </body>
 
 </html>
