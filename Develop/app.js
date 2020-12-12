@@ -44,90 +44,17 @@ function promptUser() {
     ]);
 }
 
-// promptUser();
-
-// async function createTemplate(){
-//     fs.writeFile(outputPath, render(team), function(error){
-//         if (error) {
-//             return console.log(error);
-//           }
-//             console.log("Your team roster has been created.");
-//           })
-//         };
-
-// createTemplate();
-
 promptUser()
-  .then(function createTemplate() {
-      fs.writeFile(outputPath, render(team), function(error){
-        if (error) {
-             return console.log(error);
-           }
-              console.log("Your team roster has been created.");
-           })
-         });
+    .then(function createTemplate() {
+        fs.writeFile(outputPath, render(team), function (error) {
+            if (error) {
+                return console.log(error);
+            }
+            console.log("Your team roster has been created.");
+        })
+    });
 
 // createTemplate();
-    //Create license badge based on input
-//     let badge = "https://img.shields.io/badge/license-MIT-green";
-//     if (data.license == "Apache") {
-//       badge = "https://img.shields.io/badge/license-Apache-blue";
-//     } else if (data.license == "GNU") {
-//       badge = "https://img.shields.io/badge/license-GNU-HSL(20%C2%B0%2C%20100%25%2C%2050%25)";
-//     } else {
-//       badge = "https://img.shields.io/badge/license-MIT-green"
-//     };
-
-//     const filename = "generatedREADME.md"
-
-//     var markdown = 
-    
-// `# ${data.title}
-
-// ${data.url}
-
-// ## License
-// ![badge](${badge}) 
-  
-// ## Description
-// ${data.description}
-
-// ${data.shots}
-  
-// ## Table of Contents
-// * [Installation](#installation)
-// * [Usage](#usage) 
-// * [Contribution](#contribution) 
-// * [Test](#test) 
-// * [Questions](#questions) 
-  
-// ## Installation
-// ${data.installation}
-  
-// ## Usage
-// ${data.usage}
-  
-// ## Contribution
-// ${data.contribution}
-  
-// ## Test
-// ${data.test}
-  
-// ## Questions
-// For questions please contact the project creator:
-// * ${data.github}
-// * ${data.email}
-// `;
-  
-// fs.writeFile(filename, markdown, function(err){
-//   if (err) {
-//     return console.log(err);
-//   }
-//     console.log("README is created");
-//   })
-// });
-
-
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
