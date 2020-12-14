@@ -56,9 +56,18 @@ function promptEmployee() {
 promptEmployee()
 
 function promptManager(name, id, email) {
-    let manager = new Manager(name, id, email);
-    team.push(manager);
-    promptAdd();
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is the manager's office number?"
+        }
+    ]).then(function (employee) {
+        let officeNumber = employee.officeNumber;
+        let manager = new Manager(name, id, email, officeNumber);
+        team.push(manager);
+        promptAdd();
+    })
 };
 
 function promptEngineer(name, id, email) {
