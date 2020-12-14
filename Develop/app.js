@@ -9,10 +9,11 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { normalize } = require("path");
 
 const team = [];
 
-function promptUser() {
+function promptEmployee() {
     return inquirer.prompt([
         {
             type: "list",
@@ -35,23 +36,57 @@ function promptUser() {
             name: "email",
             message: "What is the employee's email?"
         }
-    ]).then(function(team) {
-        let name = team.name;
-        let email = team.email;
-        let id = team.id;
-        switch (team.role) {
+    ]).then(function (employee) {
+        let name = employee.name;
+        let email = employee.email;
+        let id = employee.id;
+        switch (employee.role) {
+            case "Manager":
+                promptManager(name, id, email);
+                break;
             case "Engineer":
                 promptEngineer(name, id, email);
                 break;
             case "Intern":
                 promptIntern(name, id, email);
-                break;   
-            case "Manager":
-                promptManager(name, id, email);
                 break;
         }
-    }) 
+    })
 };
+
+promptEmployee()
+
+
+function promptEngineer(name, id, email) {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "gitHub",
+            message: "What is the engineer's GitHub address?"
+        }
+    ]).then(function (employee) {
+        let gitHub = employee.gitHub;
+        let engineer = new Engineer(name, id, email, gitHub);
+        team.push(engineer);
+        promptEmployee();
+    })
+};
+
+function promptIntern(name, id, email) {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "school",
+            message: "What is the intern's school name?"
+        }
+    ]).then(function (employee) {
+        let school = employee.school;
+        let intern = new Intern(name, id, email, school);
+        team.push(intern);
+        promptEmployee();
+    })
+};
+
 
 // {
 //     type: "list",
@@ -59,22 +94,17 @@ function promptUser() {
 //     message: "Would you like to add another employee to your team?",
 //     choices: ["Yes", "No"]
 // },
+// if yes, promptEmployee();
+// if no, 
+//     .then(function createTemplate(team) {
 
-
-promptUser()
-    .then(function createTemplate(data) {
-
-        fs.writeFile(outputPath, render(team), function (error) {
-            if (error) {
-                return console.log(error);
-            }
-            console.log("Your team roster has been created.");
-        })
-    });
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+//     fs.writeFile(outputPath, render(team), function (error) {
+//         if (error) {
+//             return console.log(error);
+//         }
+//         console.log("Your team roster has been created.");
+//     })
+// });
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -84,6 +114,3 @@ promptUser()
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above to target this location.
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
