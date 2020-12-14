@@ -9,7 +9,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { normalize } = require("path");
 
 const team = [];
 
@@ -56,6 +55,11 @@ function promptEmployee() {
 
 promptEmployee()
 
+function promptManager(name, id, email) {
+    let manager = new Manager(name, id, email);
+    team.push(manager);
+    promptAdd();
+};
 
 function promptEngineer(name, id, email) {
     return inquirer.prompt([
@@ -68,7 +72,7 @@ function promptEngineer(name, id, email) {
         let gitHub = employee.gitHub;
         let engineer = new Engineer(name, id, email, gitHub);
         team.push(engineer);
-        promptEmployee();
+        promptAdd();
     })
 };
 
@@ -83,34 +87,38 @@ function promptIntern(name, id, email) {
         let school = employee.school;
         let intern = new Intern(name, id, email, school);
         team.push(intern);
-        promptEmployee();
+        promptAdd();
+    })
+};
+
+function promptAdd() {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "more",
+            message: "Would you like to add another employee to your team?",
+            choices: ["Yes", "No"]
+        }
+    ]).then(function (add) {
+        switch (add.more) {
+            case "Yes":
+                promptEmployee();
+                break;
+            case "No":
+                createTemplate();
+                break;
+        }
+    })
+};
+
+function createTemplate(team) {
+    fs.writeFile(outputPath, render(team), function (error) {
+        if (error) {
+            return console.log(error);
+        }
+        console.log("Your team roster has been created.");
     })
 };
 
 
-// {
-//     type: "list",
-//     name: "add",
-//     message: "Would you like to add another employee to your team?",
-//     choices: ["Yes", "No"]
-// },
-// if yes, promptEmployee();
-// if no, 
-//     .then(function createTemplate(team) {
-
-//     fs.writeFile(outputPath, render(team), function (error) {
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log("Your team roster has been created.");
-//     })
-// });
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above to target this location.
 
