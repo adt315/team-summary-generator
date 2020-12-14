@@ -34,18 +34,36 @@ function promptUser() {
             type: "input",
             name: "email",
             message: "What is the employee's email?"
-        },
-        {
-            type: "list",
-            name: "add",
-            message: "Would you like to add another employee to your team?",
-            choices: ["Yes", "No"]
-        },
-    ]);
-}
+        }
+    ]).then(function(team) {
+        let name = team.name;
+        let email = team.email;
+        let id = team.id;
+        switch (team.role) {
+            case "Engineer":
+                promptEngineer(name, id, email);
+                break;
+            case "Intern":
+                promptIntern(name, id, email);
+                break;   
+            case "Manager":
+                promptManager(name, id, email);
+                break;
+        }
+    }) 
+};
+
+// {
+//     type: "list",
+//     name: "add",
+//     message: "Would you like to add another employee to your team?",
+//     choices: ["Yes", "No"]
+// },
+
 
 promptUser()
-    .then(function createTemplate() {
+    .then(function createTemplate(data) {
+
         fs.writeFile(outputPath, render(team), function (error) {
             if (error) {
                 return console.log(error);
@@ -54,7 +72,6 @@ promptUser()
         })
     });
 
-// createTemplate();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
