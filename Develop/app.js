@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const team = [];
+const employees = [];
 
 function promptEmployee() {
     return inquirer.prompt([
@@ -35,7 +35,7 @@ function promptEmployee() {
             name: "email",
             message: "What is the employee's email?"
         }
-    ]).then(function (employee) {
+    ]).then(function(employee) {
         let name = employee.name;
         let email = employee.email;
         let id = employee.id;
@@ -65,7 +65,7 @@ function promptManager(name, id, email) {
     ]).then(function (employee) {
         let officeNumber = employee.officeNumber;
         let manager = new Manager(name, id, email, officeNumber);
-        team.push(manager);
+        employees.push(manager);
         promptAdd();
     })
 };
@@ -80,7 +80,7 @@ function promptEngineer(name, id, email) {
     ]).then(function (employee) {
         let gitHub = employee.gitHub;
         let engineer = new Engineer(name, id, email, gitHub);
-        team.push(engineer);
+        employees.push(engineer);
         promptAdd();
     })
 };
@@ -95,7 +95,7 @@ function promptIntern(name, id, email) {
     ]).then(function (employee) {
         let school = employee.school;
         let intern = new Intern(name, id, email, school);
-        team.push(intern);
+        employees.push(intern);
         promptAdd();
     })
 };
@@ -120,8 +120,8 @@ function promptAdd() {
     })
 };
 
-function createTemplate(team) {
-    fs.writeFile(outputPath, render(team), function (error) {
+function createTemplate() {
+    fs.writeFile(outputPath, render(employees), function(error) {
         if (error) {
             return console.log(error);
         }
