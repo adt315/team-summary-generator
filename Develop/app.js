@@ -128,6 +128,3 @@ function createTemplate() {
         console.log("Your team roster has been created.");
     })
 };
-
-
-
